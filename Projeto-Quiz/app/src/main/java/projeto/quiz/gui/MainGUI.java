@@ -1,4 +1,4 @@
-package projeto.quiz.gui;
+/*package projeto.quiz.gui;
 
 import javax.swing.*;
 import java.awt.*;
@@ -106,3 +106,4 @@ public class MainGUI extends JFrame {
         });
     }
 }
+*/

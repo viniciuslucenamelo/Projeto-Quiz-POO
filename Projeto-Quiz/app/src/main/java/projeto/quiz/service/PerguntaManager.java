@@ -18,34 +18,55 @@ public class PerguntaManager {
     public void adicionarPergunta() {
         Scanner scanner = new Scanner(System.in);
 
+        System.out.println(); // para formatação
         System.out.println("Insira o título da pergunta: ");
         String titulo = scanner.nextLine();
-
+        System.out.println(); // para formatação
         System.out.println("Área do conhecimento da pergunta: ");
         String areaDoConhecimento = scanner.nextLine();
 
         Pergunta pergunta = new Pergunta(titulo, areaDoConhecimento);
 
+        String opcao, afirmativa;
+        boolean opcaoCorreta;
+
+        for (int i = 1; i <= 4; i++) {
+            System.out.println(); // para formatação
+            System.out.println("Insira a opção da pergunta " + i + ": ");
+            opcao = scanner.nextLine();
+            System.out.println("Insira a afirmativa para a opção " + i + ": ");
+            afirmativa = scanner.nextLine();
+            System.out.print("Essa é a opção correta? (true/false): "); 
+
+            opcaoCorreta = Boolean.parseBoolean(scanner.nextLine());
+
+            // criando instância de alternativa
+            Alternativa alternativa = new Alternativa(opcao, afirmativa, opcaoCorreta);
+
+            // adicionando a alternativa à pergunta
+            pergunta.adicionarAlternativa(alternativa);
+        }
+
         // Adiciona a pergunta ao repositório
         repository.add(pergunta);
 
         System.out.println("Pergunta adicionada com sucesso!");
-    }
-
-    public void listarPerguntas() {
-        List<Pergunta> perguntas = repository.getAll();
-
-        if (perguntas.isEmpty()) {
-            System.out.println("Não há perguntas disponíveis.");
-        } else {
-            System.out.println("Lista de Perguntas:");
-            for (int i = 0; i < perguntas.size(); i++) {
-                Pergunta pergunta = perguntas.get(i);
-                System.out.println(i + ". Título: " + pergunta.getTitulo());
-                System.out.println("   Área do Conhecimento: " + pergunta.getAreaDoConhecimento());
-                // Pode adicionar lógica para listar alternativas aqui, se necessário
-            }
         }
+
+        public void listarPerguntas() {
+            List<Pergunta> perguntas = repository.getAll();
+
+            if (perguntas.isEmpty()) {
+                System.out.println("Não há perguntas disponíveis.");
+            } else {
+                System.out.println("Lista de Perguntas:");
+                for (int i = 0; i < perguntas.size(); i++) {
+                    Pergunta pergunta = perguntas.get(i);
+                    System.out.println(i + ". Título: " + pergunta.getTitulo());
+                    System.out.println("   Área do Conhecimento: " + pergunta.getAreaDoConhecimento());
+                    // Pode adicionar lógica para listar alternativas aqui, se necessário
+                }
+            }
     }
 
     public void removerPergunta() {

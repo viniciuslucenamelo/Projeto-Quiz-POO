@@ -5,7 +5,7 @@ public class Alternativa {
     private String afirmativa;
     private boolean opcaoCorreta;
 
-    public Alternativa(String afirmativa, boolean opcaoCorreta) {
+    public Alternativa(String opcao, String afirmativa, boolean opcaoCorreta) {
         this.opcao = opcao;
         this.afirmativa = afirmativa;
         this.opcaoCorreta = opcaoCorreta;

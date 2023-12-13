@@ -36,7 +36,7 @@ public class AdicionarPergunta implements Commands {
             opcaoCorreta = Boolean.parseBoolean(System.console().readLine());
 
             // criando instância de alternativa
-            Alternativa alternativa = new Alternativa(afirmativa, opcaoCorreta);
+            Alternativa alternativa = new Alternativa(opcao, afirmativa, opcaoCorreta);
 
             // adicionando a alternativa à pergunta
             pergunta.adicionarAlternativa(alternativa);
