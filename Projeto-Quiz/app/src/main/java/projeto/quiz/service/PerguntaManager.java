@@ -1,10 +1,12 @@
 package projeto.quiz.service;
 import projeto.quiz.Refatorado.Exception.ListaVaziaException;
+import projeto.quiz.Refatorado.Exception.RespostaNaoEncontradaException;
 
 import java.util.List;
 import java.util.Scanner;
 
 import projeto.quiz.domain.Pergunta;
+import projeto.quiz.domain.RandomNum;
 import projeto.quiz.domain.Alternativa;
 import projeto.quiz.repository.PerguntaRepository;
 
@@ -14,6 +16,50 @@ public class PerguntaManager {
     public PerguntaManager(PerguntaRepository repository) {
         this.repository = repository;
     }
+
+    public void jogar() throws ListaVaziaException {
+        List<Pergunta> perguntas = repository.getAll();
+    
+        if (perguntas.isEmpty()) {
+            throw new ListaVaziaException("Não há perguntas disponíveis para jogar.");
+        }
+    
+        System.out.println("Iniciando o jogo!");
+        System.out.println();
+    
+        int pontuacao = 0;
+    
+        for (Pergunta pergunta : perguntas) {
+            System.out.println("Pergunta: " + pergunta.getTitulo());
+            System.out.println("Área do Conhecimento: " + pergunta.getAreaDoConhecimento());
+            System.out.println("Escolha a opção correta:");
+    
+            List<Alternativa> alternativas = pergunta.getAlternativas();
+            for (Alternativa alternativa : alternativas) {
+                System.out.println(alternativa.getOpcao() + ". " + alternativa.getAfirmativa());
+            }
+    
+            Scanner scanner = new Scanner(System.in);
+            System.out.print("Sua resposta: ");
+            String respostaUsuario = scanner.nextLine();
+    
+            if (pergunta.verificarResposta(respostaUsuario)) {
+                System.out.println("Resposta correta! Pontuação +1");
+                pontuacao++;
+            } else {
+                try {
+                    System.out.println("Resposta incorreta. A resposta correta era: " + pergunta.obterRespostaCorreta());
+                } catch (RespostaNaoEncontradaException ex) {
+                    System.out.println("Erro ao obter a resposta correta: " + ex.getMessage());
+                }
+            }
+    
+            System.out.println();
+        }
+    
+        System.out.println("Fim do jogo! Pontuação final: " + pontuacao);
+    }
+    
 
     public void adicionarPergunta() {
         Scanner scanner = new Scanner(System.in);

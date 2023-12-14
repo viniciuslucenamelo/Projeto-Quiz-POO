@@ -50,8 +50,7 @@ public class Menu {
                         perguntaManager.listarPerguntas();
                         break;
                     case 5:
-                        JogarCommand jogarCommand = new JogarCommand();
-                        commandExecutor.executeCommand(jogarCommand);
+                        perguntaManager.jogar();
                         break;
                     case 6:
                         System.out.println("Encerrando o programa.");
