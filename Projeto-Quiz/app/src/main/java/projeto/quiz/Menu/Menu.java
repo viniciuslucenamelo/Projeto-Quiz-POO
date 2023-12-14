@@ -30,6 +30,7 @@ public class Menu {
             System.out.println("4- Listar Perguntas");
             System.out.println("5- Jogar");
             System.out.println("6- Sair");
+            System.out.println("7- Placar");
             System.out.println();
 
             try {
@@ -56,6 +57,9 @@ public class Menu {
                         System.out.println("Encerrando o programa.");
                         System.exit(0);
                         break;
+                    case 7:
+                        perguntaManager.exibirPlacar();
+                        break;    
                     default:
                         System.out.println("Opção inválida. Tente novamente.");
                 }

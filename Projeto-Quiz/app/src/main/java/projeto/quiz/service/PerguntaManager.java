@@ -4,6 +4,8 @@ import projeto.quiz.Refatorado.Exception.RespostaNaoEncontradaException;
 
 import java.util.List;
 import java.util.Scanner;
+import java.util.HashMap;
+import java.util.Map;
 
 import projeto.quiz.domain.Pergunta;
 import projeto.quiz.domain.RandomNum;
@@ -12,12 +14,19 @@ import projeto.quiz.repository.PerguntaRepository;
 
 public class PerguntaManager {
     private final PerguntaRepository repository;
+    private final Map<String, Integer> placar;  
 
     public PerguntaManager(PerguntaRepository repository) {
         this.repository = repository;
+        this.placar = new HashMap<>();
     }
 
     public void jogar() throws ListaVaziaException {
+        Scanner inputScanner = new Scanner(System.in);
+
+        System.out.print("Digite o seu nome:");
+        String nomeUsuario = inputScanner.nextLine();
+
         List<Pergunta> perguntas = repository.getAll();
     
         if (perguntas.isEmpty()) {
@@ -58,8 +67,20 @@ public class PerguntaManager {
         }
     
         System.out.println("Fim do jogo! Pontuação final: " + pontuacao);
+
+        placar.put(nomeUsuario, pontuacao);
     }
-    
+
+    public void exibirPlacar() {
+        if (placar.isEmpty()) {
+            System.out.println("Não há placar registrado.");
+        } else {
+            System.out.println("Placar dos jogos anteriores:");
+            for (Map.Entry<String, Integer> entry : placar.entrySet()) {
+                System.out.println("Nome: " + entry.getKey() + ", Pontuação: " + entry.getValue());
+            }
+        }
+    }
 
     public void adicionarPergunta() {
         Scanner scanner = new Scanner(System.in);
