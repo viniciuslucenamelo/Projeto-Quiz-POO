@@ -95,41 +95,79 @@ public class PerguntaManager {
 
     public void adicionarPergunta() {
         Scanner scanner = new Scanner(System.in);
-
+    
         System.out.println(); // para formatação
-        System.out.println("Insira o título da pergunta: ");
+        System.out.println("Insira o título da pergunta (ou 0 para voltar ao menu): ");
         String titulo = scanner.nextLine();
-        System.out.println(); // para formatação
+        
+        if (titulo.equals("0")) {
+            return; // Volta para o menu
+        }
+        
+        while (titulo.trim().isEmpty()) {
+            System.out.println("Título não pode estar em branco!");
+            System.out.println("Insira o título da pergunta (ou 0 para voltar ao menu): ");
+            titulo = scanner.nextLine();
+            
+            if (titulo.equals("0")) {
+                return; // Volta para o menu
+            }
+        }
+    
         System.out.println("Área do conhecimento da pergunta: ");
         String areaDoConhecimento = scanner.nextLine();
-
+    
+        while (areaDoConhecimento.trim().isEmpty()) {
+            System.out.println("Área do conhecimento não pode estar em branco!");
+            System.out.println("Insira a área do conhecimento da pergunta (ou 0 para voltar ao menu): ");
+            areaDoConhecimento = scanner.nextLine();
+            
+            if (areaDoConhecimento.equals("0")) {
+                return; // Volta para o menu
+            }
+        }
+    
         Pergunta pergunta = new Pergunta(titulo, areaDoConhecimento);
-
+    
         String opcao, afirmativa;
         boolean opcaoCorreta;
-
+    
         for (int i = 1; i <= 4; i++) {
             System.out.println(); // para formatação
             System.out.println("Insira a opção da pergunta " + i + ": ");
             opcao = scanner.nextLine();
+            
+            while (opcao.trim().isEmpty()) {
+                System.out.println("Opção não pode estar em branco!");
+                System.out.println("Insira a opção da pergunta " + i + ": ");
+                opcao = scanner.nextLine();
+            }
+    
             System.out.println("Insira a afirmativa para a opção " + i + ": ");
             afirmativa = scanner.nextLine();
+            
+            while (afirmativa.trim().isEmpty()) {
+                System.out.println("Afirmativa não pode estar em branco!");
+                System.out.println("Insira a afirmativa para a opção " + i + ": ");
+                afirmativa = scanner.nextLine();
+            }
+    
             System.out.print("Essa é a opção correta? (true/false): "); 
-
             opcaoCorreta = Boolean.parseBoolean(scanner.nextLine());
-
+    
             // criando instância de alternativa
             Alternativa alternativa = new Alternativa(opcao, afirmativa, opcaoCorreta);
-
+    
             // adicionando a alternativa à pergunta
             pergunta.adicionarAlternativa(alternativa);
         }
-
+    
         // Adiciona a pergunta ao repositório
         repository.add(pergunta);
-
+    
         System.out.println("Pergunta adicionada com sucesso!");
-        }
+    }
+    
 
         public void listarPerguntas() {
             List<Pergunta> perguntas = repository.getAll();
