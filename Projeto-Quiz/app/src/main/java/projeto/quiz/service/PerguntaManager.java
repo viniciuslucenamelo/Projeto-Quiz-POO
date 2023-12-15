@@ -22,16 +22,27 @@ public class PerguntaManager {
     }
 
     public void jogar() throws ListaVaziaException {
-        Scanner inputScanner = new Scanner(System.in);
-
-        System.out.print("Digite o seu nome:");
-        String nomeUsuario = inputScanner.nextLine();
 
         List<Pergunta> perguntas = repository.getAll();
-    
+
         if (perguntas.isEmpty()) {
-            throw new ListaVaziaException("Não há perguntas disponíveis para jogar.");
+            System.out.println("Não há perguntas disponíveis para jogar.");
+            return; // Retorna ao menu
         }
+
+        Scanner inputScanner = new Scanner(System.in);
+        String nomeUsuario;
+
+        do {
+            System.out.print("Digite o seu nome (ou digite 0 para voltar ao menu): ");
+            nomeUsuario = inputScanner.nextLine();
+
+            if (nomeUsuario.equals("0")) {
+                return; // Retorna ao menu
+            } else if (nomeUsuario.isEmpty()) {
+                System.out.println("Por favor, digite um nome válido.");
+            }
+        } while (nomeUsuario.isEmpty());
     
         System.out.println("Iniciando o jogo!");
         System.out.println();
@@ -131,7 +142,6 @@ public class PerguntaManager {
                     Pergunta pergunta = perguntas.get(i);
                     System.out.println(i + ". Título: " + pergunta.getTitulo());
                     System.out.println("   Área do Conhecimento: " + pergunta.getAreaDoConhecimento());
-                    // Pode adicionar lógica para listar alternativas aqui, se necessário
                 }
             }
     }
