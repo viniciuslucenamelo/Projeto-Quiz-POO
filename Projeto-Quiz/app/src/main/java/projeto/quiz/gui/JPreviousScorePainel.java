@@ -4,6 +4,11 @@
  */
 package projeto.quiz.gui;
 
+import java.util.Map;
+
+import javax.swing.DefaultListModel;
+
+import main.java.projeto.quiz.repository.PontuacaoData;
 
 /**
  *
@@ -11,11 +16,23 @@ package projeto.quiz.gui;
  */
 public class JPreviousScorePainel extends javax.swing.JFrame {
 
-    /**
-     * Creates new form JPlacarAnterior
-     */
+    private final PontuacaoData pontuacaoData;
+
     public JPreviousScorePainel() {
         initComponents();
+        pontuacaoData = new PontuacaoData();
+        preencherJList();
+    }
+
+    private void preencherJList() {
+        Map<String, Integer> pontuacoes = pontuacaoData.obterPontuacoes();
+        
+        DefaultListModel<String> model = new DefaultListModel<>();
+        pontuacoes.forEach((nomeJogador, pontuacao) -> {
+            model.addElement(nomeJogador + ": " + pontuacao);
+        });
+
+        jList1.setModel(model);
     }
 
     /**
