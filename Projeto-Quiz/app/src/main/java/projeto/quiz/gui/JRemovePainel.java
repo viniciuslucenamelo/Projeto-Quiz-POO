@@ -53,15 +53,12 @@ public class JRemovePainel extends javax.swing.JFrame {
         jList1.setBackground(new java.awt.Color(0, 102, 102));
         jList1.setForeground(new java.awt.Color(252, 252, 252));
         jList1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            String[] strings = { "Clique aqui para selecionar e em remover"};
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
         jScrollPane1.setViewportView(jList1);
 
-        jLabel86.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel86.setForeground(new java.awt.Color(242, 242, 242));
-        jLabel86.setText("Selecione a pergunta que deseja remover:");
 
         jButton1.setText("Remover");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
