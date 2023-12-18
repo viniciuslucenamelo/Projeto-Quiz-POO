@@ -34,12 +34,7 @@ public class JListPainel extends javax.swing.JFrame {
             listarPerguntasCommand.execute();
             List<Pergunta> perguntas = listarPerguntasCommand.getPerguntas();
 
-            System.out.println(perguntas.size());
-            DefaultListModel<String> listModel = new DefaultListModel<>();
-            for (Pergunta pergunta : perguntas) {
-                listModel.addElement(pergunta.getTitulo());
-            }
-            jList1.setModel(listModel);
+            jList1.setListData(perguntas.toArray(new Pergunta[0]));
 
             jLabel86.setText("");
     }
@@ -75,11 +70,6 @@ public class JListPainel extends javax.swing.JFrame {
 
         jList1.setBackground(new java.awt.Color(0, 102, 102));
         jList1.setForeground(new java.awt.Color(252, 252, 252));
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane1.setViewportView(jList1);
 
         jLabel86.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -214,7 +204,7 @@ public class JListPainel extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel85;
     private javax.swing.JLabel jLabel86;
-    private javax.swing.JList<String> jList1;
+    private javax.swing.JList<Pergunta> jList1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel2;

@@ -20,6 +20,11 @@ public class Pergunta implements Serializable {
         this.alternativas = new ArrayList<>(); // inicia a lista
     }
 
+    @Override
+    public String toString() {
+        return titulo;
+    }
+
     public List<Alternativa> getAlternativas() {
         return alternativas;
     }

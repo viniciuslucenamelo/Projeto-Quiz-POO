@@ -277,7 +277,7 @@ public class JAddPainel extends javax.swing.JFrame {
     }
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
-        AdicionarPerguntaGUI adicionarPerguntaCommand = new AdicionarPerguntaGUI(this, jTextFieldA, jTextFieldA, jTextFieldA, jTextFieldA, jTextFieldA, jTextFieldA, jCheckBox1, jCheckBox4, jCheckBox2, jCheckBox3);
+        AdicionarPerguntaGUI adicionarPerguntaCommand = new AdicionarPerguntaGUI(this, jTextFieldTitulo, jTextFieldADC, jTextFieldA, jTextFieldD, jTextFieldB, jTextFieldC, jCheckBox1, jCheckBox4, jCheckBox2, jCheckBox3);
         adicionarPerguntaCommand.execute();
         this.dispose();
     }
