@@ -2,7 +2,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package ProjetoQuiz;
+package projeto.quiz.gui;
+
+import java.util.List;
+
+import javax.swing.DefaultListModel;
+
+import projeto.quiz.Refatorado.Exception.ListaVaziaException;
+import projeto.quiz.commands.ListarPerguntas;
+import projeto.quiz.domain.Pergunta;
 
 /**
  *
@@ -10,13 +18,32 @@ package ProjetoQuiz;
  */
 public class JListPainel extends javax.swing.JFrame {
 
+
+    private ListarPerguntas listarPerguntasCommand;
+    
     /**
      * Creates new form JListarPainel
      */
     public JListPainel() {
         initComponents();
+        listarPerguntasCommand = new ListarPerguntas();
+        preencherJList();
     }
 
+    private void preencherJList(){
+            listarPerguntasCommand.execute();
+            List<Pergunta> perguntas = listarPerguntasCommand.getPerguntas();
+
+            DefaultListModel<String> listModel = new DefaultListModel<>();
+            for (Pergunta pergunta : perguntas) {
+                listModel.addElement(pergunta.getTitulo());
+            }
+            jList1.setModel(listModel);
+
+            jLabel86.setText("");
+    }
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -144,6 +171,7 @@ public class JListPainel extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+    
 
     /**
      * @param args the command line arguments

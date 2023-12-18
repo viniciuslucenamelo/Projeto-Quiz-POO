@@ -2,7 +2,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package ProjetoQuiz;
+package projeto.quiz.gui;
+
+import javax.swing.JOptionPane;
+
+import org.checkerframework.common.returnsreceiver.qual.This;
+
+import projeto.quiz.commands.AdicionarPergunta;
+import projeto.quiz.commands.AdicionarPerguntaGUI;
 
 /**
  *
@@ -240,25 +247,43 @@ public class JAddPainel extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox1ActionPerformed
+    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {
+        handleCheckBoxAction(jCheckBox1);
 
-    private void jCheckBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox2ActionPerformed
+    }
+    
+    private void jCheckBox2ActionPerformed(java.awt.event.ActionEvent evt) {
+        handleCheckBoxAction(jCheckBox2);
+    }
+    
+    private void jCheckBox3ActionPerformed(java.awt.event.ActionEvent evt) {
+        handleCheckBoxAction(jCheckBox3);
+    }
+    
+    private void jCheckBox4ActionPerformed(java.awt.event.ActionEvent evt) {
+        handleCheckBoxAction(jCheckBox4);
+    }
+    
+    private void handleCheckBoxAction(javax.swing.JCheckBox checkBox) {
+        if (checkBox.isSelected()) {
+            jCheckBox1.setSelected(checkBox == jCheckBox1);
+            jCheckBox2.setSelected(checkBox == jCheckBox2);
+            jCheckBox3.setSelected(checkBox == jCheckBox3);
+            jCheckBox4.setSelected(checkBox == jCheckBox4);
+        }
+        
+        boolean resposta = checkBox.isSelected();
 
-    private void jCheckBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox3ActionPerformed
+    }
 
-    private void jCheckBox4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox4ActionPerformed
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
+        AdicionarPerguntaGUI adicionarPerguntaCommand = new AdicionarPerguntaGUI(this, jTextFieldA, jTextFieldA, jTextFieldA, jTextFieldA, jTextFieldA, jTextFieldA, jCheckBox1, jCheckBox1, jCheckBox1, jCheckBox1);
+        adicionarPerguntaCommand.execute();
+        
+    }
+    
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         this.dispose();

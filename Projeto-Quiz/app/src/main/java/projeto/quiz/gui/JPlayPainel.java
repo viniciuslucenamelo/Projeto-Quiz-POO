@@ -2,7 +2,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package ProjetoQuiz;
+package projeto.quiz.gui;
+
 
 /**
  *
@@ -10,10 +11,10 @@ package ProjetoQuiz;
  */
 public class JPlayPainel extends javax.swing.JFrame {
 
-    /**
-     * Creates new form jJogarPainel
-     */
-    public JPlayPainel() {
+    private final String nomeJogador; // Adicione este atributo
+
+    public JPlayPainel(String nomeJogador) {
+        this.nomeJogador = nomeJogador;
         initComponents();
     }
 
@@ -207,7 +208,17 @@ public class JPlayPainel extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JPlayPainel().setVisible(true);
+                JRequestNamePainel requestNamePainel = new JRequestNamePainel();
+                requestNamePainel.setVisible(true);
+    
+                // Espera até que o usuário insira o nome e clique no botão
+                // Pode ser necessário adicionar lógica de espera aqui
+    
+                String nomeJogador = requestNamePainel.getNomeJogador();
+                requestNamePainel.dispose();
+    
+                JPlayPainel jogar = new JPlayPainel(nomeJogador);
+                jogar.setVisible(true);
             }
         });
     }

@@ -21,7 +21,7 @@ public class PerguntaManager {
         this.placar = new HashMap<>();
     }
 
-    public void jogar() throws ListaVaziaException {
+    public void jogar(String nomeJogador) throws ListaVaziaException {
 
         List<Pergunta> perguntas = repository.getAll();
 
@@ -43,7 +43,6 @@ public class PerguntaManager {
                 System.out.println("Por favor, digite um nome válido.");
             }
         } while (nomeUsuario.isEmpty());
-    
         System.out.println("Iniciando o jogo!");
         System.out.println();
     
@@ -79,7 +78,7 @@ public class PerguntaManager {
     
         System.out.println("Fim do jogo! Pontuação final: " + pontuacao);
 
-        placar.put(nomeUsuario, pontuacao);
+        placar.put(nomeJogador, pontuacao);
     }
 
     public void exibirPlacar() {

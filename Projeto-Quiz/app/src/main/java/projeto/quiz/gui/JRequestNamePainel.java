@@ -2,7 +2,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package ProjetoQuiz;
+package projeto.quiz.gui;
+
 
 /**
  *
@@ -10,11 +11,18 @@ package ProjetoQuiz;
  */
 public class JRequestNamePainel extends javax.swing.JFrame {
 
+    private String nomeJogador;
+
     /**
      * Creates new form JRequestNamePainel
      */
     public JRequestNamePainel() {
         initComponents();
+    }
+
+
+    public String getNomeJogador() {
+        return nomeJogador;
     }
 
     /**
@@ -167,11 +175,12 @@ public class JRequestNamePainel extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {
         this.dispose();
-        JPlayPainel jogar = new JPlayPainel();
+        JPlayPainel jogar = new JPlayPainel(jTextField1.getText());
         jogar.setVisible(true);
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }
+    
 
     /**
      * @param args the command line arguments
