@@ -1,6 +1,8 @@
 package projeto.quiz.domain;
 
-public class Alternativa {
+import java.io.Serializable;
+
+public class Alternativa implements Serializable {
     private String opcao;
     private String afirmativa;
     private boolean opcaoCorreta;

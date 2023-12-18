@@ -34,6 +34,7 @@ public class JListPainel extends javax.swing.JFrame {
             listarPerguntasCommand.execute();
             List<Pergunta> perguntas = listarPerguntasCommand.getPerguntas();
 
+            System.out.println(perguntas.size());
             DefaultListModel<String> listModel = new DefaultListModel<>();
             for (Pergunta pergunta : perguntas) {
                 listModel.addElement(pergunta.getTitulo());

@@ -4,6 +4,7 @@
  */
 package projeto.quiz.gui;
 
+import projeto.quiz.commands.RemoverPerguntaGUI;
 
 /**
  *
@@ -60,7 +61,7 @@ public class JRemovePainel extends javax.swing.JFrame {
 
         jLabel86.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel86.setForeground(new java.awt.Color(242, 242, 242));
-        jLabel86.setText("Digite o número da pergunta que deseja remover:");
+        jLabel86.setText("Selecione a pergunta que deseja remover:");
 
         jButton1.setText("Remover");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -159,7 +160,7 @@ public class JRemovePainel extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        new RemoverPerguntaGUI(this).execute();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed

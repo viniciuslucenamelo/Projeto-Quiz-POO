@@ -4,11 +4,13 @@ import java.util.List;
 
 import projeto.quiz.Refatorado.Exception.RespostaNaoEncontradaException;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Pergunta{
+public class Pergunta implements Serializable {
     
     public String titulo;
+    private transient List<Pergunta> perguntas;
     public String areaDoConhecimento;
     private List<Alternativa> alternativas; // lista para armazenar as alternativas
 

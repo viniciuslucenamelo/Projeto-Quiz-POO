@@ -81,6 +81,7 @@ public class AdicionarPerguntaGUI implements Commands{
             pergunta.getAlternativas().add(new Alternativa("C", alternativaCString, alternativaCCheck));
             pergunta.getAlternativas().add(new Alternativa("D", alternativaDString, alternativaDCheck));
         
+            perguntaService.adicionarPergunta(pergunta);
             JOptionPane.showMessageDialog(tituloField.getParent(), "Pergunta criada com sucesso!");
             System.out.println("Alternativa A: " + alternativaACheck);
             System.out.println("Alternativa B: " + alternativaBCheck);

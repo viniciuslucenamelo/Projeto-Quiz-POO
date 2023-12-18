@@ -10,7 +10,7 @@ import java.util.List;
 
 import projeto.quiz.domain.Pergunta;
 
-public class FileDataService extends InMemoryDataService {
+public class FileDataService extends InMemoryDataService implements AutoCloseable{
     public FileDataService() {
         File data = new File("data.bin");
         if (data.exists()) {
@@ -46,5 +46,10 @@ public class FileDataService extends InMemoryDataService {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void close() {
+        write();
     }
 }

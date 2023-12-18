@@ -15,7 +15,7 @@ public class PerguntaRepository {
 
     public static PerguntaRepository getInstance() {
         if (instance == null) {
-            instance = new PerguntaRepository(new InMemoryDataService());
+            instance = new PerguntaRepository(new FileDataService());
         }
 
         return instance;
@@ -43,7 +43,6 @@ public class PerguntaRepository {
     }
 
     public void add(Pergunta pergunta) {
-        perguntas.add(pergunta);
-        //dataService.add(pergunta);  // Adicionando a pergunta também no DataService
+        dataService.add(pergunta);
     }
 }

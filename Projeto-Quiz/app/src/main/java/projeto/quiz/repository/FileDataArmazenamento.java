@@ -10,7 +10,7 @@ import java.util.List;
 
 import projeto.quiz.domain.Pergunta;
 
-public class FileDataArmazenamento extends InMemoryArmazenamento{
+public class FileDataArmazenamento extends InMemoryArmazenamento implements AutoCloseable{
     public FileDataArmazenamento() {
         File guardarPergunta = new File("questoes.bin");
         if (guardarPergunta.exists()){
@@ -28,11 +28,18 @@ public class FileDataArmazenamento extends InMemoryArmazenamento{
         write();
     }
 
+    @Override
+    public void close() {
+        write();
+    }
+
     private void write() {
         try (ObjectOutputStream ios = new ObjectOutputStream(new FileOutputStream("questoes.bin"))) {
             ios.writeObject(getPerguntas());
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    
 }
-}
+

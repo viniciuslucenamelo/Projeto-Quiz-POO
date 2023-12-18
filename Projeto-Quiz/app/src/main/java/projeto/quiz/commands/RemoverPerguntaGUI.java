@@ -1,95 +1,64 @@
 package projeto.quiz.commands;
 
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.List;
-
-import projeto.quiz.Refatorado.Exception.ListaVaziaException;
-import projeto.quiz.domain.Pergunta;
 import projeto.quiz.service.PerguntaService;
 import projeto.quiz.repository.PerguntaRepository;
+import projeto.quiz.Refatorado.Exception.ListaVaziaException;
+import projeto.quiz.domain.Pergunta;
 
-public class RemoverPerguntaGUI extends JFrame {
+import java.util.List;
 
-    private PerguntaService perguntaService = new PerguntaService(PerguntaRepository.getInstance());
-    private JList<Pergunta> perguntaList;
+public class RemoverPerguntaGUI implements Commands {
 
-    public RemoverPerguntaGUI() {
-        setTitle("Remover Pergunta");
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setLayout(new BorderLayout());
+    private JFrame frame;
 
+    public RemoverPerguntaGUI(JFrame frame) {
+        this.frame = frame;
+    }
+
+    @Override
+    public void execute() {
         try {
-            // Listar as perguntas disponíveis
-            List<Pergunta> perguntas = perguntaService.getPerguntas();
-
-            if (perguntas.isEmpty()) {
-                throw new ListaVaziaException("Não há perguntas para remover.");
-            }
-            
-
-            DefaultListModel<Pergunta> perguntaListModel = new DefaultListModel<>();
-            for (Pergunta pergunta : perguntas) {
-                perguntaListModel.addElement(pergunta);
-            }
-
-            perguntaList = new JList<>(perguntaListModel);
-            perguntaList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-
-            JScrollPane scrollPane = new JScrollPane(perguntaList);
-            add(scrollPane, BorderLayout.CENTER);
-
-            JButton removerButton = new JButton("Remover Pergunta");
-            removerButton.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    removerPerguntaSelecionada();
-                }
-            });
-
-            JButton voltarButton = new JButton("Voltar");
-            voltarButton.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    dispose();
-                }
-            });
-
-            JPanel buttonPanel = new JPanel();
-            buttonPanel.add(removerButton);
-            buttonPanel.add(voltarButton);
-
-            add(buttonPanel, BorderLayout.SOUTH);
-
+            removerPergunta();
         } catch (ListaVaziaException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
-            dispose();
+            JOptionPane.showMessageDialog(frame, e.getMessage());
         }
-        setUndecorated(true);
-        pack();
-        setLocationRelativeTo(null);
-        setVisible(true);
     }
 
-    private void removerPerguntaSelecionada() {
-        int selectedIndex = perguntaList.getSelectedIndex();
-        if (selectedIndex != -1) {
-            Pergunta perguntaSelecionada = perguntaList.getSelectedValue();
-            try {
-                perguntaService.remover(perguntaSelecionada);
-                JOptionPane.showMessageDialog(null, "Pergunta removida com sucesso.");
-                dispose();
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(null, "Erro ao remover a pergunta: " + ex.getMessage());
+    private void removerPergunta() throws ListaVaziaException {
+        PerguntaService perguntaService = new PerguntaService(PerguntaRepository.getInstance());
+        List<Pergunta> perguntas = perguntaService.getPerguntas();
+
+        if (perguntas.isEmpty()) {
+            throw new ListaVaziaException("Não há perguntas para apagar.");
+        }
+
+        String[] opcoes = new String[perguntas.size()];
+
+        // Preencher opcoes com os títulos das perguntas disponíveis
+        for (int i = 0; i < perguntas.size(); i++) {
+            opcoes[i] = perguntas.get(i).getTitulo();
+        }
+
+        // Mostrar diálogo de seleção de pergunta
+        String escolha = (String) JOptionPane.showInputDialog(frame,
+                "Escolha a pergunta para remover:", "Remover Pergunta",
+                JOptionPane.QUESTION_MESSAGE, null, opcoes, opcoes[0]);
+
+        // Verificar se o usuário fez uma escolha válida
+        if (escolha != null) {
+            for (Pergunta pergunta : perguntas) {
+                if (pergunta.getTitulo().equals(escolha)) {
+                    // Remover pergunta usando o serviço
+                    perguntaService.remover(pergunta);
+
+                    JOptionPane.showMessageDialog(frame, "Pergunta removida com sucesso.");
+                    return;
+                }
             }
-        } else {
-            JOptionPane.showMessageDialog(null, "Selecione uma pergunta para remover.");
         }
-    }
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> new RemoverPerguntaGUI());
+        // Se chegou aqui, o usuário cancelou ou ocorreu algum erro
+        JOptionPane.showMessageDialog(frame, "Remoção de pergunta cancelada ou ocorreu um erro.");
     }
 }
