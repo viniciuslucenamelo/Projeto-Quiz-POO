@@ -74,11 +74,13 @@ public class AdicionarPerguntaGUI implements Commands{
         boolean alternativaDValida = alternativaDValidatorContext.validate(alternativaDString);
     
         if (tituloValido && areaValida && alternativaAValida && alternativaBValida && alternativaCValida && alternativaDValida) {
-            Pergunta pergunta = new Pergunta(tituloString, areaDeConhecimento); 
+            Pergunta pergunta = new Pergunta(tituloString, areaDeConhecimento);
+        
             pergunta.getAlternativas().add(new Alternativa("A", alternativaAString, alternativaACheck));
             pergunta.getAlternativas().add(new Alternativa("B", alternativaBString, alternativaBCheck));
             pergunta.getAlternativas().add(new Alternativa("C", alternativaCString, alternativaCCheck));
             pergunta.getAlternativas().add(new Alternativa("D", alternativaDString, alternativaDCheck));
+        
             JOptionPane.showMessageDialog(tituloField.getParent(), "Pergunta criada com sucesso!");
             System.out.println("Alternativa A: " + alternativaACheck);
             System.out.println("Alternativa B: " + alternativaBCheck);
